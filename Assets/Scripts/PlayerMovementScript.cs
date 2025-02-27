@@ -33,7 +33,7 @@ public class PlayerMovementScript : MonoBehaviour
     }
 
     void Move(float dir) {
-        rb.velocity=new Vector2(dir*speed, rb.velocity.y);
+        rb.linearVelocity=new Vector2(dir*speed, rb.linearVelocity.y);
     }
 
     void OnJump() {
@@ -49,7 +49,7 @@ public class PlayerMovementScript : MonoBehaviour
 
     void Jump() {
         timesJumped++;
-        rb.velocity=new Vector2(rb.velocity.x, jumpHeight);
+        rb.linearVelocity=new Vector2(rb.linearVelocity.x, jumpHeight);
     }
 
     void OnTriggerEnter2D(Collider2D collision) {
