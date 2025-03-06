@@ -14,9 +14,12 @@ public class PlayerMovementScript : MonoBehaviour
     bool isGrounded=false;
     int timesJumped=0;
     bool isFacingRight=true;
+    private Vector3 spawnPoint;
+
     void Start()
     {
         rb=GetComponent<Rigidbody2D>();
+        spawnPoint = transform.position;
     }
 
     // Update is called once per frame
@@ -52,10 +55,6 @@ public class PlayerMovementScript : MonoBehaviour
         rb.linearVelocity=new Vector2(rb.linearVelocity.x, jumpHeight);
     }
 
-    void OnTriggerEnter2D(Collider2D collision) {
-        
-    }
-
     void OnCollisionEnter2D(Collision2D collision) {
         
     }
@@ -82,5 +81,14 @@ public class PlayerMovementScript : MonoBehaviour
         newLocalScale.x*=-1f;
         transform.localScale=newLocalScale;
         isFacingRight=!isFacingRight;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+        {
+            transform.position = spawnPoint; // Reset to the starting position
+            rb.linearVelocity = Vector2.zero; // Stop movement
+        }
     }
 }
