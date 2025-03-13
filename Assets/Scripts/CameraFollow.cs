@@ -15,7 +15,8 @@ public class CameraFollow2D : MonoBehaviour
     {
         if (player != null)
         {
-            Vector3 newPosition = new Vector3(player.position.x, player.position.y, transform.position.z);
+            // Follow the player's X position and keep Y fixed
+            Vector3 newPosition = new Vector3(player.position.x, fixedY, transform.position.z);
             transform.position = Vector3.Lerp(transform.position, newPosition, smoothSpeed);
         }
     }

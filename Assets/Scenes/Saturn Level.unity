@@ -163,9 +163,10 @@ GameObject:
   - component: {fileID: 50642263}
   - component: {fileID: 50642267}
   - component: {fileID: 50642271}
-  - component: {fileID: 50642269}
   - component: {fileID: 50642273}
   - component: {fileID: 50642272}
+  - component: {fileID: 50642274}
+  - component: {fileID: 50642275}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -244,7 +245,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 5638909855141247568, guid: 8b87867d36620409a8dc74bc6458264e, type: 3}
+  m_Sprite: {fileID: 3891470551224643988, guid: 2ec3db7440fad47028c2e9a9e29657f4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -264,8 +265,8 @@ Transform:
   m_GameObject: {fileID: 50642262}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.94, y: -4.74, z: 0}
-  m_LocalScale: {x: 0.13191995, y: 0.13504429, z: 0.15581116}
+  m_LocalPosition: {x: -4.4999, y: -4.818, z: 0}
+  m_LocalScale: {x: 1.1991862, y: 1.3037927, z: 0.15581116}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -300,43 +301,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 1878225911}
---- !u!70 &50642269
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 50642262}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 10.900001, y: 9.620001}
-  m_Direction: 0
 --- !u!114 &50642271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,7 +310,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 50642262}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66e97f10584fd42778e646c1d027fca8, type: 3}
+  m_Script: {fileID: 11500000, guid: 19a5567a316fd479699436d7b9879ac2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 8
@@ -354,6 +318,8 @@ MonoBehaviour:
   jumpSound: {fileID: 8300000, guid: 476201cf0f6b14545856c94480e6e9eb, type: 3}
   runSound: {fileID: 8300000, guid: 440670e4a41674d529307fdf06205b02, type: 3}
   deathSound: {fileID: 8300000, guid: 27754d1cb749f4d3689091554c840f83, type: 3}
+  minX: -6.96
+  maxX: 38.56
 --- !u!82 &50642272
 AudioSource:
   m_ObjectHideFlags: 0
@@ -375,7 +341,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 0.45553732
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -548,6 +514,83 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &50642274
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50642262}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0dc851862a7fd44d1aa4318cff1fd800, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!60 &50642275
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50642262}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.1875, y: 1.125}
+    newSize: {x: 2.26, y: 4}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.34375, y: 0.5625}
+      - {x: -0.53125, y: 0.4375}
+      - {x: -0.59375, y: 0.25}
+      - {x: -0.59375, y: -0.3125}
+      - {x: -0.40625, y: -0.5625}
+      - {x: 0.34375, y: -0.5625}
+      - {x: 0.59375, y: -0.1875}
+      - {x: 0.59375, y: 0.5625}
+  m_UseDelaunayMesh: 0
 --- !u!1 &135078064
 GameObject:
   m_ObjectHideFlags: 0
@@ -3082,12 +3125,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1116544146}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d9f85bb7e16d4c3688adcbcf0d2b0cf, type: 3}
+  m_Script: {fileID: 11500000, guid: 2c45fb1bc990b4661958b6129397a496, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   PointA: {fileID: 19313053}
   PointB: {fileID: 135078064}
-  speed: 5
+  speed: 3
 --- !u!95 &1116544153
 Animator:
   serializedVersion: 7
@@ -3280,12 +3323,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1518112245}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d9f85bb7e16d4c3688adcbcf0d2b0cf, type: 3}
+  m_Script: {fileID: 11500000, guid: 2c45fb1bc990b4661958b6129397a496, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   PointA: {fileID: 19313053}
   PointB: {fileID: 135078064}
-  speed: 5
+  speed: 3
 --- !u!70 &1518112248
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -3472,12 +3515,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1545003786}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d9f85bb7e16d4c3688adcbcf0d2b0cf, type: 3}
+  m_Script: {fileID: 11500000, guid: 2c45fb1bc990b4661958b6129397a496, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   PointA: {fileID: 1403325183}
   PointB: {fileID: 245446326}
-  speed: 5
+  speed: 3
 --- !u!70 &1545003789
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
