@@ -52,7 +52,7 @@ public class PlayerMovementScript : MonoBehaviour
         rb.linearVelocity = velocity;
 
         // Clamp the player's position within the bounds
-        float clampedX = Mathf.Clamp(rb.position.x, -6.96f, 38.56f);
+        float clampedX = Mathf.Clamp(rb.position.x, -5.66f, 38.56f);
         rb.position = new Vector2(clampedX, rb.position.y);
     }
     void OnMove(InputValue value) {
