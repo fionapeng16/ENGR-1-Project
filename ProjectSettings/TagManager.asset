@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - Enemy
+  - DeathZone
   layers:
   - Default
   - TransparentFX
@@ -43,5 +44,13 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 2652977565
+    locked: 0
+  - name: Object
+    uniqueID: 651957935
+    locked: 0
   m_RenderingLayers:
   - Default
+  - 'Layer '
+  - Layer 2

@@ -14,12 +14,21 @@ public class PlayerMovementScript : MonoBehaviour
     bool isGrounded=false;
     int timesJumped=0;
     bool isFacingRight=true;
-    private Vector3 spawnPoint;
+    private Vector3 spawnPoint;    public AudioClip jumpSound;
+    public AudioClip runSound;
+    public AudioClip deathSound;
+    private AudioSource audioSource; // For jump & death
+    private AudioSource runAudioSource; // Separate source for running
 
     void Start()
     {
         rb=GetComponent<Rigidbody2D>();
         spawnPoint = transform.position;
+        // Get or Add AudioSources
+        audioSource = GetComponent<AudioSource>();
+        runAudioSource = gameObject.AddComponent<AudioSource>(); // Add second AudioSource
+        runAudioSource.clip = runSound;
+        runAudioSource.loop = true; // Running sound should loop
     }
 
     // Update is called once per frame
@@ -30,18 +39,50 @@ public class PlayerMovementScript : MonoBehaviour
             flip();
         }
     }
+
+    void FixedUpdate()
+    {
+        // Get current velocity
+        Vector2 velocity = rb.linearVelocity;
+
+        // Move the player normally
+        velocity.x = direction * speed;
+
+        // Apply the velocity to the Rigidbody
+        rb.linearVelocity = velocity;
+
+        // Clamp the player's position within the bounds
+        float clampedX = Mathf.Clamp(rb.position.x, -6.96f, 38.56f);
+        rb.position = new Vector2(clampedX, rb.position.y);
+    }
     void OnMove(InputValue value) {
         float v = value.Get<float>();
         direction=v;
     }
 
-    void Move(float dir) {
-        rb.linearVelocity=new Vector2(dir*speed, rb.linearVelocity.y);
+    void Move(float dir)
+    {
+        rb.linearVelocity = new Vector2(dir * speed, rb.linearVelocity.y);
+
+        // Play running sound only when moving and grounded
+        if (dir != 0 && isGrounded)
+        {
+            if (!runAudioSource.isPlaying)
+            {
+                runAudioSource.Play();
+            }
+        }
+        else
+        {
+            // Stop the running sound when the player stops moving
+            runAudioSource.Stop();
+        }
     }
 
     void OnJump() {
         if (isGrounded || timesJumped==1) {
-            Jump();  
+            Jump();
+            audioSource.PlayOneShot(jumpSound);
         }
                   
         else {
@@ -55,9 +96,6 @@ public class PlayerMovementScript : MonoBehaviour
         rb.linearVelocity=new Vector2(rb.linearVelocity.x, jumpHeight);
     }
 
-    void OnCollisionEnter2D(Collision2D collision) {
-        
-    }
 
     void OnCollisionStay2D(Collision2D collision ) {
         if (collision.gameObject.CompareTag("Ground")) {
@@ -83,12 +121,19 @@ public class PlayerMovementScript : MonoBehaviour
         isFacingRight=!isFacingRight;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+void OnTriggerEnter2D(Collider2D collision)
+{
+    if (collision.CompareTag("Enemy") || collision.CompareTag("DeathZone"))
     {
-        if (collision.CompareTag("Enemy"))
-        {
-            transform.position = spawnPoint; // Reset to the starting position
-            rb.linearVelocity = Vector2.zero; // Stop movement
-        }
+        Respawn();
     }
+}
+
+private void Respawn()
+{
+    audioSource.PlayOneShot(deathSound);
+    transform.position = spawnPoint; // Reset to the starting position
+    rb.linearVelocity = Vector2.zero; // Stop movement
+}
+
 }
