@@ -322,7 +322,15 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      jupiter_portal_0: -7872191552019766781
+      jupiter_portal_1: 8719070386938721275
+      jupiter_portal_2: -839190607911000419
+      jupiter_portal_3: 7327541133046745018
+      jupiter_portal_4: -6970717026671091921
+      jupiter_portal_5: 3628517250406605823
+      jupiter_portal_6: -7294423701707881839
+      jupiter_portal_7: 676359232750797916
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

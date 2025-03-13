@@ -322,7 +322,15 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      neptune_portal_0: -7281890275454076894
+      neptune_portal_1: -2077013287689809000
+      neptune_portal_2: -843050717860175936
+      neptune_portal_3: -2791033145822305208
+      neptune_portal_4: 3696266424051333721
+      neptune_portal_5: 3871934977253822130
+      neptune_portal_6: 7348792548234968316
+      neptune_portal_7: -7930900863740283598
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

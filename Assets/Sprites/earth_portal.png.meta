@@ -322,7 +322,15 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      earth_portal_0: -1450966714091010050
+      earth_portal_1: -2880797761813998168
+      earth_portal_2: 4465249462911458831
+      earth_portal_3: 3111280505122228642
+      earth_portal_4: 4696785859496072912
+      earth_portal_5: -6427877667678177229
+      earth_portal_6: -4212260563521911110
+      earth_portal_7: -561475544507500885
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

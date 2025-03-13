@@ -322,7 +322,15 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      saturn_portal_0: -5950080730815611193
+      saturn_portal_1: 6293112103044106356
+      saturn_portal_2: -5788783642966467145
+      saturn_portal_3: 8274732883670876526
+      saturn_portal_4: -9082417624976103753
+      saturn_portal_5: 1395988407263314364
+      saturn_portal_6: 2013505815528293247
+      saturn_portal_7: 4767235869000220481
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
