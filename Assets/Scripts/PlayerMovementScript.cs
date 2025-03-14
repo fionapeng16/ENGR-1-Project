@@ -149,6 +149,7 @@ public class PlayerMovementScript : MonoBehaviour
     // Clamping variables for X position (set this in the Unity editor per level)
     public float minX = -6.96f;
     public float maxX = 38.56f;
+    int timer = 0;
 
     void Start()
     {
@@ -157,7 +158,7 @@ public class PlayerMovementScript : MonoBehaviour
         runAudioSource = gameObject.AddComponent<AudioSource>(); // Add second AudioSource
         runAudioSource.clip = runSound;
         runAudioSource.loop = true; // Running sound should loop
-
+        timer = 0;
         // Initial spawn point and animator setup
         spawnPoint = transform.position;
         animator = GetComponent<Animator>();
@@ -201,6 +202,7 @@ public class PlayerMovementScript : MonoBehaviour
         // Move the player horizontally
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         rb.linearVelocity = new Vector2(dir * speed, rb.linearVelocity.y);
+        animator.SetBool("isRunning", dir!=0);
 
         // Play running sound only when moving and grounded
         if (dir != 0 && isGrounded)
@@ -249,9 +251,9 @@ public class PlayerMovementScript : MonoBehaviour
         {
             HandleGroundCollision(collision);
         }
-        else if (collision.gameObject.CompareTag("Enemy"))
+        else if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("DeathZone"))
         {
-            HandleEnemyCollision();
+            HandleDeath();
         }
     }
 
@@ -279,23 +281,17 @@ public class PlayerMovementScript : MonoBehaviour
 
     void HandleGroundCollision(Collision2D collision)
     {
+        animator.SetBool("isJumping", false);
+        animator.SetBool("isDoubleJumping", false);
+        timesJumped=0;
         // Check if grounded based on collision angles
         for (int i = 0; i < collision.contactCount; i++)
         {
             if (Vector2.Angle(collision.GetContact(i).normal, Vector2.up) < 45f)
             {
                 isGrounded = true;
-                animator.SetBool("isJumping", false);
-                timesJumped = 0;
             }
         }
-    }
-
-    void HandleEnemyCollision()
-    {
-        // Handle player death on enemy collision
-        isDead = true;
-        animator.SetBool("isDead", true);
     }
 
     void ClampPosition()
@@ -327,19 +323,30 @@ public class PlayerMovementScript : MonoBehaviour
     void HandleDeath()
     {
         // Handle player respawn after death
-        if (audioSource && deathSound)
+        /*if (audioSource && deathSound)
         {
             audioSource.PlayOneShot(deathSound);
-        }
+        }*/
 
-        if (isDead && animator && spawnPoint != null)
-        {
-            transform.position = spawnPoint;
-            Rigidbody2D rb = GetComponent<Rigidbody2D>();
-            rb.linearVelocity = Vector2.zero;
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        if (timer==1000) {
+            transform.position = spawnPoint; // Reset to the starting position
+            //rb.linearVelocity = Vector2.zero; // Stop movement
             isDead = false;
             animator.SetBool("isDead", false);
-        }
+            timer = 0;
+         }
+         else if (timer==0) {
+            isDead = true;
+            animator.SetBool("isDead", true);
+            audioSource.PlayOneShot(deathSound);
+            timer++;
+         }
+         else {
+             timer++;
+             rb.linearVelocity = Vector2.zero; // Stop movement
+
+         }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -347,11 +354,11 @@ public class PlayerMovementScript : MonoBehaviour
         // Handle triggers for enemy and death zones
         if (collision.CompareTag("Enemy") || collision.CompareTag("DeathZone"))
         {
-            Respawn();
+            HandleDeath();
         }
     }
 
-    void Respawn()
+    /*void Respawn()
     {
         // Reset player position to spawn point
         if (audioSource && deathSound)
@@ -362,5 +369,5 @@ public class PlayerMovementScript : MonoBehaviour
         transform.position = spawnPoint;
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         rb.linearVelocity = Vector2.zero;
-    }
+    }*/
 }
