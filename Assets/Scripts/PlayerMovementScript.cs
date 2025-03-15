@@ -322,31 +322,31 @@ public class PlayerMovementScript : MonoBehaviour
 
     void HandleDeath()
     {
-        // Handle player respawn after death
-        /*if (audioSource && deathSound)
+        // Ensure the death animation is triggered once when the cat dies
+        if (!isDead)
         {
-            audioSource.PlayOneShot(deathSound);
-        }*/
-
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        if (timer==1000) {
-            transform.position = spawnPoint; // Reset to the starting position
-            //rb.linearVelocity = Vector2.zero; // Stop movement
-            isDead = false;
-            animator.SetBool("isDead", false);
-            timer = 0;
-         }
-         else if (timer==0) {
             isDead = true;
             animator.SetBool("isDead", true);
-            audioSource.PlayOneShot(deathSound);
-            timer++;
-         }
-         else {
-             timer++;
-             rb.linearVelocity = Vector2.zero; // Stop movement
+            // Play the death sound
+            if (audioSource && deathSound)
+            {
+                audioSource.PlayOneShot(deathSound);
+            }
+            StartCoroutine(DeathCoroutine());
+        }
+    }
 
-         }
+    IEnumerator DeathCoroutine()
+    {
+        // Wait for a short amount of time (e.g., 1 second) before respawning
+        yield return new WaitForSeconds(1f); // Adjust this time based on how long you want the death animation to last
+
+        // After the wait, respawn the player
+        transform.position = spawnPoint;
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        rb.linearVelocity = Vector2.zero; // Stop movement
+        isDead = false;
+        animator.SetBool("isDead", false); // Reset death animation
     }
 
     void OnTriggerEnter2D(Collider2D collision)
